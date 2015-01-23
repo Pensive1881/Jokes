@@ -28,7 +28,7 @@ class JokesController < ApplicationController
 
     respond_to do |format|
       if @joke.save
-        format.html { redirect_to @joke, notice: 'Joke was successfully created.' }
+        format.html { redirect_to jokes_path, notice: 'Joke was successfully created.' }
         format.json { render :show, status: :created, location: @joke }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class JokesController < ApplicationController
   def update
     respond_to do |format|
       if @joke.update(joke_params)
-        format.html { redirect_to @joke, notice: 'Joke was successfully updated.' }
+        format.html { redirect_to jokes_path, notice: 'Joke was successfully updated.' }
         format.json { render :show, status: :ok, location: @joke }
       else
         format.html { render :edit }
@@ -59,6 +59,12 @@ class JokesController < ApplicationController
       format.html { redirect_to jokes_url, notice: 'Joke was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def upvote
+    @joke = Joke.find(params[:id])
+    @joke.votes.create
+    redirect_to(joke_path)
   end
 
   private

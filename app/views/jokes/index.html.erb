@@ -16,6 +16,8 @@
       <tr>
         <td><%= joke.setup %></td>
         <td><%= joke.punchline %></td>
+        <td><%= pluralize(joke.votes.count, "vote") %></td>
+        <td><%= button_to '+1', upvote_joke_path(joke), method: :post %></td>
         <td><%= link_to 'Show', joke %></td>
         <td><%= link_to 'Edit', edit_joke_path(joke) %></td>
         <td><%= link_to 'Destroy', joke, method: :delete, data: { confirm: 'Are you sure?' } %></td>
